@@ -1,9 +1,9 @@
-import 'package:esosa/styles/space.dart';
-import 'package:esosa/styles/text.dart';
+import 'package:esosa/presentation/styles/space.dart';
+import 'package:esosa/presentation/styles/text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
-import '../blocs/user_cubit.dart';
+import '../../business logic/user_controller.dart';
 
 class ChangeNameDialog extends StatefulWidget {
   const ChangeNameDialog({Key? key}) : super(key: key);
@@ -39,8 +39,8 @@ class _ChangeNameDialogState extends State<ChangeNameDialog> {
               child: ElevatedButton(
                   onPressed: () {
                     if (_controller.text.isNotEmpty) {
-                      context.read<UserCubit>().setUsername(_controller.text
-                          .replaceRange(
+                      context.read()<UserController>().setUsername(
+                          _controller.text.replaceRange(
                               0, 1, _controller.text[0].toUpperCase()));
                       Navigator.pop(context);
                     }

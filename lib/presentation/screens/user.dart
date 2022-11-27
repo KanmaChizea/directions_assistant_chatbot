@@ -1,8 +1,8 @@
-import 'package:esosa/blocs/user_cubit.dart';
-import 'package:esosa/styles/space.dart';
-import 'package:esosa/styles/text.dart';
+import 'package:esosa/business%20logic/user_controller.dart';
+import 'package:esosa/presentation/styles/space.dart';
+import 'package:esosa/presentation/styles/text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class UserData extends StatefulWidget {
   const UserData({Key? key}) : super(key: key);
@@ -48,8 +48,8 @@ class _UserDataState extends State<UserData> {
                 child: ElevatedButton(
                     onPressed: () {
                       if (_controller.text.isNotEmpty) {
-                        context.read<UserCubit>().setUsername(_controller.text
-                            .replaceRange(
+                        context.read<UserController>().setUsername(
+                            _controller.text.replaceRange(
                                 0, 1, _controller.text[0].toUpperCase()));
                         Navigator.of(context)
                             .pushNamedAndRemoveUntil('home', (route) => false);

@@ -1,4 +1,6 @@
+import 'package:esosa/business%20logic/message_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../styles/colors.dart';
 import '../styles/space.dart';
@@ -52,7 +54,12 @@ class _BottomTextBoxState extends State<BottomTextBox> {
           child: FloatingActionButton(
             elevation: 5,
             backgroundColor: primary,
-            onPressed: () {},
+            onPressed: () {
+              if (_controller.text.isNotEmpty) {
+                context.read<MessageController>().sendMessage(_controller.text);
+                _controller.clear();
+              }
+            },
             child: const Icon(Icons.send),
           ),
         )

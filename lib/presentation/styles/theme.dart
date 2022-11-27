@@ -1,5 +1,5 @@
-import 'package:esosa/styles/colors.dart';
-import 'package:esosa/styles/text.dart';
+import 'package:esosa/presentation/styles/colors.dart';
+import 'package:esosa/presentation/styles/text.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
@@ -29,5 +29,3 @@ ThemeData lightTheme = ThemeData(
     ),
   ),
 );
-
-ThemeData darkTheme = ThemeData(brightness: Brightness.dark);

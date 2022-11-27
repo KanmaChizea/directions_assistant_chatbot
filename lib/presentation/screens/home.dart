@@ -1,9 +1,9 @@
-import 'package:esosa/styles/space.dart';
-import 'package:esosa/styles/text.dart';
+import 'package:esosa/presentation/styles/space.dart';
+import 'package:esosa/presentation/styles/text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
-import '../blocs/user_cubit.dart';
+import '../../business logic/user_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,20 +24,29 @@ class HomeScreen extends StatelessWidget {
                   const Text('Esosa', style: h3Medium)
                 ],
               ),
-              Flexible(flex: 1, child: Container()),
-              Text('Welcome ${context.read<UserCubit>().state}', style: h1Bold),
+              Flexible(flex: 2, child: Container()),
+              Text('Welcome ${context.watch<UserController>().username}',
+                  style: h1Bold),
               space16,
               const Text('It\'s a good day to go out on the streets of benin',
                   style: bodyRegular),
+              space64,
               space64,
               Align(
                 alignment: Alignment.center,
                 child: ElevatedButton(
                     onPressed: () => Navigator.of(context)
                         .pushNamedAndRemoveUntil('chat', (route) => false),
-                    child: const Text('Continue to directions')),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+                        Text('Continue to directions'),
+                        space8,
+                        Icon(Icons.arrow_forward_ios)
+                      ],
+                    )),
               ),
-              Flexible(flex: 2, child: Container()),
+              Flexible(flex: 3, child: Container()),
             ],
           ),
         ),
