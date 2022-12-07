@@ -3,6 +3,7 @@ import 'package:esosa/presentation/styles/text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../business logic/message_controller.dart';
 import '../../business logic/user_controller.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,8 +36,11 @@ class HomeScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: ElevatedButton(
-                    onPressed: () => Navigator.of(context)
-                        .pushNamedAndRemoveUntil('chat', (route) => false),
+                    onPressed: () {
+                      context.read<MessageController>().initializeChat();
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil('chat', (route) => false);
+                    },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: const [

@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'business logic/user_status_controller.dart';
+import 'data/chatbot_services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userServices = UserServices();
+    final chatbotServices = ChatbotService();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -27,7 +29,8 @@ class MyApp extends StatelessWidget {
                 UserStatusController(userServices)..isNewUser()),
         ChangeNotifierProvider(
             create: (context) => UserController(userServices)),
-        ChangeNotifierProvider(create: (context) => MessageController())
+        ChangeNotifierProvider(
+            create: (context) => MessageController(chatbotServices))
       ],
       child: Builder(builder: (context) {
         return MaterialApp(
