@@ -22,7 +22,7 @@ class MessageController extends ChangeNotifier {
         author: esosa,
         id: uuid.v4(),
         text:
-            "What's your starting location?");
+            "What's your starting location? (e.g. maingate)");
     messageList.insert(0, message);
     notifyListeners();
   }
