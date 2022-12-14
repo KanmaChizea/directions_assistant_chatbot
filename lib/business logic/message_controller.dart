@@ -22,7 +22,7 @@ class MessageController extends ChangeNotifier {
         author: esosa,
         id: uuid.v4(),
         text:
-            "Where can i help you get to today? (e.g. From Maingate to Boundary)");
+            "What's your starting location?");
     messageList.insert(0, message);
     notifyListeners();
   }
@@ -47,12 +47,20 @@ class MessageController extends ChangeNotifier {
   }
 
   Future<void> receiveMessage(String text) async {
-    final response = await _service.getResponse(text);
+    bool resetContext = text.toLowerCase() == 'yes' || text.toLowerCase() == 'yeah'; 
+    final response = await _service.getResponse(text,resetContext);
     final message = TextMessage(
         author: esosa,
         id: uuid.v4(),
         text: response ?? 'Sorry, please ask your question again');
     messageList[0] = message;
     notifyListeners();
+    if (response!.length > 40){
+      messageList.insert(0, TextMessage(
+        author: esosa,
+        id: uuid.v4(),
+        text: 'Can i help you with anything else?'));
+    }
   }
+
 }
